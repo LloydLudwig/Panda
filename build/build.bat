@@ -1,0 +1,2 @@
+@ECHO BUILDING PANDA
+dotnet build
