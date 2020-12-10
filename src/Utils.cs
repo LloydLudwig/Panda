@@ -18,7 +18,7 @@ namespace Panda {
                 }
             } catch(Exception ex){ // if error accours while opening file
                 Console.WriteLine("could not open file");
-                Console.WriteLine(ex.toString());
+                Console.WriteLine(ex.ToString());
             }
         }
     }
