@@ -5,7 +5,12 @@ using System.Text;
 
 namespace Panda {
     class Utils{
-        // take in file_name and string list to store line in
+        
+        /// <summary>
+        /// read file_name and store in code_line
+        /// </summary>
+        /// <param name="file_name">name of code file</param>
+        /// <param name="code_line">List to store code lines</param>
         public static void parse(String file_name, List<String> code_line){
             try { // try open file
                 var code_file = new FileStream( @file_name, FileMode.Open, FileAccess.Read);
