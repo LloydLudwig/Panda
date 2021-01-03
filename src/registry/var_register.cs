@@ -31,9 +31,13 @@ namespace Panda {
         /// <param name="var_name"> the name of the variable </param>
         /// <returns>dynamic variable value</returns>
         public dynamic get_variable(string var_name) {
-            dynamic var_value;
-            P_var.TryGetValue(var_name, out var_value);
-            return var_value;
+            try {
+                dynamic var_value;
+                P_var.TryGetValue(var_name, out var_value);
+                return var_value;
+            }catch (KeyNotFoundException) {
+                return null;
+            }
         }
     }
 
