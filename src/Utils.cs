@@ -21,9 +21,8 @@ namespace Panda {
                         code_line.Add(line);
                     }
                 }
-            } catch(Exception ex){ // if error accours while opening file
+            } catch(FileNotFoundException){ // if error accours while opening file
                 Console.WriteLine("Could not open file");
-                Console.WriteLine(ex.ToString());
             }
         }
     }
