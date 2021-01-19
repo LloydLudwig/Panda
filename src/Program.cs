@@ -14,8 +14,8 @@ namespace Panda {
             string lang_mode = "en";
             if (args.Length == 0 || args == null){
                 Console.WriteLine("Executing Panda in english mode");
-                lang_mode = lang_mode + ".lang";
-            } else {lang_mode = args[1] + ".lang"; }
+                lang_mode = @"..\lang\" + lang_mode + ".lang";
+            } else {lang_mode = @"..\lang\" + args[1] + ".lang"; }
 
 
             //initialise list of panda source code
