@@ -5,120 +5,158 @@ namespace Panda {
     class lexer {
 
 
-        public static void token_collection(string line_input, var_register var_Register) {
-            string token_catch = "";
-            for (int i = 0; i > line_input.Length; i++) {
-                if (char.IsWhiteSpace(line_input[i])) {
-                    //tokenizer(token_catch, var_Register);
-                    recognizer(line_input, var_Register);
-                    token_catch = "";
-                } else if (char.IsLetterOrDigit(line_input[i])) {
-                    token_catch += line_input[i];
+        /// <summary>
+        /// store the current language keywords
+        /// </summary>
+        public struct kw {
+
+            public kw(string[] lang_kw){
+                if(lang_kw.Length != 0){
+                    //selection
+                    IF = lang_kw[0];
+                    ELSE_IF = lang_kw[1];
+                    ELSE = lang_kw[2];
+                    //iteration
+                    WHILE = lang_kw[3];
+                    FOR = lang_kw[4];
+                    //operation
+                    INC = lang_kw[5];
+                    DEC = lang_kw[6];
+                    ADD = lang_kw[7];
+                    SUB = lang_kw[8];
+                    MULT = lang_kw[9];
+                    DIV = lang_kw[10];
+                    SQRT = lang_kw[11];
+                    //delcaration
+                    VAR = lang_kw[12];
+                    //data types
+                    INT = lang_kw[13];
+                    STR = lang_kw[14];
+                    FLOAT = lang_kw[15];
+                    BOOL = lang_kw[16];
+                    COMMENT = lang_kw[17];
+                }
+                //failsafe incase the default langauge file is not found, this will be used
+                //the default language file has been left in to give users a template to work with
+                else{
+                    IF = "IF";
+                    ELSE_IF = lang_kw[1];
+                    ELSE = lang_kw[2];
+                    //iteration
+                    WHILE = lang_kw[3];
+                    FOR = lang_kw[4];
+                    //operation
+                    INC = lang_kw[5];
+                    DEC = lang_kw[6];
+                    ADD = lang_kw[7];
+                    SUB = lang_kw[8];
+                    MULT = lang_kw[9];
+                    DIV = lang_kw[10];
+                    SQRT = lang_kw[11];
+                    //delcaration
+                    VAR = lang_kw[12];
+                    //data types
+                    INT = lang_kw[13];
+                    STR = lang_kw[14];
+                    FLOAT = lang_kw[15];
+                    BOOL = lang_kw[16];
+                    COMMENT = lang_kw[17];
                 }
 
             }
+            // will store the current language tokens as appropriate
+            // they only have getters as they should not be rewritten
+            public string IF {get;}
+            public string ELSE_IF {get;}
+            public string ELSE {get;}
+            public string WHILE {get;}
+            public string FOR {get;}
+            public string INC {get;}
+            public string DEC {get;}
+            public string ADD {get;}
+            public string SUB {get;}
+            public string MULT {get;}
+            public string DIV {get;}
+            public string SQRT {get;}
+            public string VAR {get;}
+            public string INT {get;}
+            public string STR {get;}
+            public string FLOAT {get;}
+            public string BOOL {get;}
+            public string COMMENT {get;}
         }
 
-        private static void tokenizer(string word, var_register var_Register) {
-            switch (word) {
-                case var num when new Regex(@"^[0-9]").IsMatch(num):
-                    var_Register.set_variable(word, null);
-                    break;
-                default:
-                    Console.WriteLine(word + " not recognised");
-                    break;
-            }
-        }
-
-        private static void recognizer(string line_input, var_register var_Register /*func_register func_Register*/) {
-            string[] words = line_input.Split(' ');
-            switch (words[0]) {
-                case "if":
-                    //if_statement()
-                    break;
-                case "while":
-                    //while_loop()
-                    break;
-                case "for":
-                    break;
-                case var temp_regex when new Regex(@"^[a-zA-Z0-9/_]+").IsMatch(temp_regex):
-                    if (words[1] == "=") {
-                        //check for interger
-                        if (new Regex(@"^[0-9]+").IsMatch(words[2])) {
-                            int temp_int = 0;
-                            getIntFromString(words[2], temp_int);
-                            var_Register.set_variable(words[0], temp_int);
-                            Console.WriteLine(words[0] + " " + temp_int);
-                        }
-                        //check for bool
-                        else if (words[2] == "true") {
-                            var_Register.set_variable(words[0], true);
-                        }
-                        else if (words[2] == "false") {
-                            var_Register.set_variable(words[0], false);
-                        }
-                        //check for string
-                        //else if (check first and last char are quotes) {
-                        //}
-
-                    }
-                    //check if next item is equal
-                    //if not check if function exists
-                    break;
-                default:
-                    Console.WriteLine("Symbole " + words[0] + " not defined");
-                    break;
-            }
-
-        }
-        //extract interger value from string
-        private static void getIntFromString(string string_input, int temp_int) {
-            try {
-                temp_int = int.Parse(string_input);
-            } catch (FormatException) {
-                Console.WriteLine("Unable to parse " +string_input);
-            }
-        }
-
-
-        public void token(string panda_line) {
-            //slice off items by white spaces
-            string[] tokens = panda_line.Split(' ');
-            string cache = "";
-            for (int i = 0; i < tokens.Length; i++) {
-                if (tokens[i].is)
-            }
-        }
-
-
-
-        enum kw {
+        //to be used as reference
+        public enum kw_index {
             //selection
-            IF,
-            ELSE_IF,
-            ELSE,
+            IF, ELSE_IF, ELSE,
             //iteration
-            WHILE,
-            FOR,
-            //opertion
-            INC,
-            DEC,
-            ADD,
-            SUM,
-            MULT,
-            DIV,
-            SQRT,
-            //delcaration
-            VAR,
-            //data types
-            INT,
-            STR,
-            FLOAT,
-            BOOL
+            WHILE, FOR,
+            //operation
+            INC, DEC,
+            ADD, SUB, MULT , DIV, SQRT,
+            //store
+            VAR, INT, STR, FLOAT, BOOL,
+
+            NULL, //whitespace or unrecognised
+            COMMENT //comments
+        };
+
+        public static kw_index match_kw(string kw, kw lang_kw){
+            if (kw[0].ToString() == lang_kw.COMMENT){
+                return lexer.kw_index.COMMENT;
+            }
+            if (kw == lang_kw.IF)      { return lexer.kw_index.IF; }
+            if (kw == lang_kw.ELSE_IF) { return lexer.kw_index.ELSE_IF; }
+            if (kw == lang_kw.ELSE)    { return lexer.kw_index.ELSE; }
+            if (kw == lang_kw.WHILE)   { return lexer.kw_index.WHILE; }
+            if (kw == lang_kw.FOR)     { return lexer.kw_index.FOR; }
+            if (kw == lang_kw.INC)     { return lexer.kw_index.INC; }
+            if (kw == lang_kw.DEC)     { return lexer.kw_index.ADD; }
+            if (kw == lang_kw.ADD)     { return lexer.kw_index.ADD; }
+            if (kw == lang_kw.SUB)     { return lexer.kw_index.SUB; }
+            if (kw == lang_kw.MULT)    { return lexer.kw_index.MULT; }
+            if (kw == lang_kw.DIV)     { return lexer.kw_index.DIV; }
+            if (kw == lang_kw.SQRT)    { return lexer.kw_index.SQRT; }
+            if (kw == lang_kw.VAR)     { return lexer.kw_index.VAR; }
+            if (kw == lang_kw.INT)     { return lexer.kw_index.INT; }
+            if (kw == lang_kw.STR)     { return lexer.kw_index.STR; }
+            if (kw == lang_kw.FLOAT)   { return lexer.kw_index.FLOAT; }
+            if (kw == lang_kw.BOOL)    { return lexer.kw_index.BOOL; }
+
+            return lexer.kw_index.NULL;
+
         }
 
-        public static void _lexer(string[] panda_source) {
-            
+        public static void _lexer(string[] panda_source, kw lang_kw) {
+            for (int i = 0; i > panda_source.Length; i++) {
+                string[] temp_line = panda_source[i].Split(' ');
+                for(int j = 0; j > temp_line.Length; j++){
+                    switch (match_kw(temp_line[j], lang_kw)) {
+                        case kw_index.VAR:
+                            Console.WriteLine(temp_line[2]);
+                            break;
+                        case kw_index.INT:
+                            break;
+                        case kw_index.STR:
+                            break;
+                        case kw_index.FLOAT:
+                            break;
+                        case kw_index.BOOL:
+                            break;
+                        case kw_index.NULL:
+                            break;
+                        case kw_index.COMMENT:
+                            break;
+                    }
+                }
+            }
+        }
+
+        //load the keywords from the .lang file
+        private static string[] load_kw(string[] list_code) {
+
+            return null;
         }
     }
 }
