@@ -13,9 +13,11 @@ namespace Panda {
             //check langauge option
             string lang_mode = "en";
             if (args.Length == 0 || args == null){
-                Console.WriteLine("Executing Panda in english mode");
+                Console.WriteLine("[Info]: Executing Panda in english mode");
                 lang_mode = @"..\lang\" + lang_mode + ".lang";
-            } else {lang_mode = @"..\lang\" + args[1] + ".lang"; }
+            } else {
+                lang_mode = @"..\lang\" + args[1] + ".lang";
+                Console.WriteLine("[Info]: Executing Panda in " + args[1] + "mode");}
 
 
             //initialise list of panda source code
@@ -26,16 +28,16 @@ namespace Panda {
             string[] lang_list = Utils.parse_file_to_array(lang_mode);
 
             //initialise variable class
-            Panda.var_register var_Register = new var_register();
+            var_register var_Register = new var_register();
             //initialise function class
-            Panda.func_register func_Register = new func_register();
+            func_register func_Register = new func_register();
 
 
             //parse the panda code into the list
             //Utils.parse_panda_code(source_filename, code_list);
 
             for (int i = 0; i < code_list.Length; i++) {
-                lexer.token_collection(code_list[i], var_Register);
+                // pass code to lexer
             }
             Console.Write("done");
             Console.Read();
