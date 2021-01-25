@@ -39,28 +39,28 @@ namespace Panda {
                 //failsafe incase the default langauge file is not found, this will be used
                 //the default language file has been left in to give users a template to work with
                 else{
-                    IF = "IF";
-                    ELSE_IF = lang_kw[1];
-                    ELSE = lang_kw[2];
+                    IF = "if";
+                    ELSE_IF = "else_if";
+                    ELSE = "else";
                     //iteration
-                    WHILE = lang_kw[3];
-                    FOR = lang_kw[4];
+                    WHILE = "while";
+                    FOR = "for";
                     //operation
-                    INC = lang_kw[5];
-                    DEC = lang_kw[6];
-                    ADD = lang_kw[7];
-                    SUB = lang_kw[8];
-                    MULT = lang_kw[9];
-                    DIV = lang_kw[10];
-                    SQRT = lang_kw[11];
+                    INC = "++";
+                    DEC = "--";
+                    ADD = "+";
+                    SUB = "-";
+                    MULT = "*";
+                    DIV = "/";
+                    SQRT = "**";
                     //delcaration
-                    VAR = lang_kw[12];
+                    VAR = "var";
                     //data types
-                    INT = lang_kw[13];
-                    STR = lang_kw[14];
-                    FLOAT = lang_kw[15];
-                    BOOL = lang_kw[16];
-                    COMMENT = lang_kw[17];
+                    INT = "int";
+                    STR = "str";
+                    FLOAT = "float";
+                    BOOL = "bool";
+                    COMMENT = "//";
                 }
 
             }
