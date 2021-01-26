@@ -17,7 +17,7 @@ namespace Panda {
                 lang_mode = @".\lang\" + lang_mode + ".lang";
             } else if (args.Length >= 2) {
                 lang_mode = @".\lang\" + args[1] + ".lang";
-                Console.WriteLine("[Info]: Executing Panda in " + args[1] + "mode");
+                Console.WriteLine("[Info]: Executing Panda in " + args[1] + " mode");
             }
 
 
@@ -41,9 +41,6 @@ namespace Panda {
             for (int i = 0; i < code_list.Length; i++) {
                 // pass code to lexer
             }
-            Console.Write("done");
-            Console.Read();
-
         }
     }
 }
