@@ -11,30 +11,36 @@ namespace Panda {
         public struct kw {
 
             public kw(string[] lang_kw){
-                if(lang_kw.Length != 0){
+                //make sure the language file is complete
+                //this is currently hardcoded
+                //this may be cause of problems as new key words are added
+                if(lang_kw.Length != 0 || lang_kw.Length != 21){
                     //selection
                     IF = lang_kw[0];
                     ELSE_IF = lang_kw[1];
                     ELSE = lang_kw[2];
+                    END_IF = lang_kw[3];
                     //iteration
-                    WHILE = lang_kw[3];
-                    FOR = lang_kw[4];
+                    WHILE = lang_kw[4];
+                    END_WHILE = lang_kw[5];
+                    FOR = lang_kw[6];
+                    END_FOR = lang_kw[7];
                     //operation
-                    INC = lang_kw[5];
-                    DEC = lang_kw[6];
-                    ADD = lang_kw[7];
-                    SUB = lang_kw[8];
-                    MULT = lang_kw[9];
-                    DIV = lang_kw[10];
-                    SQRT = lang_kw[11];
+                    INC = lang_kw[8];
+                    DEC = lang_kw[9];
+                    ADD = lang_kw[10];
+                    SUB = lang_kw[11];
+                    MULT = lang_kw[12];
+                    DIV = lang_kw[13];
+                    SQRT = lang_kw[14];
                     //delcaration
-                    VAR = lang_kw[12];
+                    VAR = lang_kw[15];
                     //data types
-                    INT = lang_kw[13];
-                    STR = lang_kw[14];
-                    FLOAT = lang_kw[15];
-                    BOOL = lang_kw[16];
-                    COMMENT = lang_kw[17];
+                    INT = lang_kw[16];
+                    STR = lang_kw[17];
+                    FLOAT = lang_kw[18];
+                    BOOL = lang_kw[19];
+                    COMMENT = lang_kw[20];
                 }
                 //failsafe incase the default langauge file is not found, this will be used
                 //the default language file has been left in to give users a template to work with
@@ -42,9 +48,12 @@ namespace Panda {
                     IF = "if";
                     ELSE_IF = "else_if";
                     ELSE = "else";
+                    END_IF = "end_if";
                     //iteration
                     WHILE = "while";
+                    END_WHILE = "end_while";
                     FOR = "for";
+                    END_FOR = "end_for";
                     //operation
                     INC = "++";
                     DEC = "--";
@@ -69,8 +78,11 @@ namespace Panda {
             public string IF {get;}
             public string ELSE_IF {get;}
             public string ELSE {get;}
+            public string END_IF {get;}
             public string WHILE {get;}
+            public string END_WHILE {get;}
             public string FOR {get;}
+            public string END_FOR {get;}
             public string INC {get;}
             public string DEC {get;}
             public string ADD {get;}
@@ -89,9 +101,9 @@ namespace Panda {
         //to be used as reference
         public enum kw_index {
             //selection
-            IF, ELSE_IF, ELSE,
+            IF, ELSE_IF, ELSE, END_IF,
             //iteration
-            WHILE, FOR,
+            WHILE, END_WHILE, FOR, END_FOR,
             //operation
             INC, DEC,
             ADD, SUB, MULT , DIV, SQRT,
