@@ -12,12 +12,13 @@ namespace Panda {
 
             //check langauge option
             string lang_mode = "en";
-            if (args.Length == 0 || args == null){
+            if (args.Length < 2 || args == null){
                 Console.WriteLine("[Info]: Executing Panda in english mode");
-                lang_mode = @"..\lang\" + lang_mode + ".lang";
-            } else {
-                lang_mode = @"..\lang\" + args[1] + ".lang";
-                Console.WriteLine("[Info]: Executing Panda in " + args[1] + "mode");}
+                lang_mode = @".\lang\" + lang_mode + ".lang";
+            } else if (args.Length >= 2) {
+                lang_mode = @".\lang\" + args[1] + ".lang";
+                Console.WriteLine("[Info]: Executing Panda in " + args[1] + "mode");
+            }
 
 
             //initialise list of panda source code
@@ -26,6 +27,7 @@ namespace Panda {
 
             //initialise langauge dependant keywords
             string[] lang_list = Utils.parse_file_to_array(lang_mode);
+            lexer.kw lang_kw = new lexer.kw(lang_list);
 
             //initialise variable class
             var_register var_Register = new var_register();
