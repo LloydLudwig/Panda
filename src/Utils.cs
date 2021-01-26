@@ -25,8 +25,11 @@ namespace Panda {
                 return code_line_list.ToArray();
             } catch(FileNotFoundException){
                 // if error accours while opening file
-                Console.WriteLine("Could not open file");
-                return null;
+                Console.WriteLine("[Warning]: Could not open file " + file_name);
+                return new string[0];
+            } catch(System.IO.DirectoryNotFoundException){
+                Console.WriteLine("Directory not found");
+                return new string[0];
             }
         }
     }
