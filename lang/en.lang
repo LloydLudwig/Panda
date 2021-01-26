@@ -1,32 +1,21 @@
-//selection
-IF, if
-ELSE_IF, else if
-ELSE, else
-IF_END, end if
-
-//iteration
-WHILE, while
-WHILE_END, end_while
-FOR, for
-FOR_END, end_for
-
-//operation
-INC, ++
-DEC, --
-ADD, +
-SUM, -
-MULT, *
-DIV, /
-SQRT, **
-
-//declaration
-VAR, var
-INT, int
-STR, str
-FLOAT, float
-BOOL, bool
-TRUE, true
-FALSE, false
-
-//symbols
-COMMENT, //
+if
+else_if
+else
+end_if
+while
+end_while
+for
+end_for
+++
+--
++
+-
+*
+/
+**
+var
+int
+str
+float
+bool
+//
