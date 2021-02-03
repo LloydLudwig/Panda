@@ -35,11 +35,10 @@ namespace Panda {
             func_register func_Register = new func_register();
 
 
-            //parse the panda code into the list
-            //Utils.parse_panda_code(source_filename, code_list);
+            
 
             for (int i = 0; i < code_list.Length; i++) {
-                // pass code to lexer
+
             }
         }
     }
