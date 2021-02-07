@@ -1,15 +1,21 @@
 using System;
-using System.Text.RegularExpressions;
 
 namespace Panda {
     class lexer {
 
+        public lexer(){
+
+        }
 
         /// <summary>
         /// store the current language keywords
         /// </summary>
         public struct kw {
 
+            /// <summary>
+            /// take string from array and store according
+            /// </summary>
+            ///<param name="lang_kw"> contains the langauge key words in the right order</param>
             public kw(string[] lang_kw){
                 //make sure the language file is complete
                 //this is currently hardcoded
@@ -98,15 +104,18 @@ namespace Panda {
             public string COMMENT {get;}
         }
 
-        //to be used as reference
+        //enumeration of the key words
         public enum kw_index {
             //selection
             IF, ELSE_IF, ELSE, END_IF,
+
             //iteration
             WHILE, END_WHILE, FOR, END_FOR,
+
             //operation
             INC, DEC,
             ADD, SUB, MULT , DIV, SQRT,
+
             //store
             VAR, INT, STR, FLOAT, BOOL,
 
@@ -114,10 +123,13 @@ namespace Panda {
             COMMENT //comments
         };
 
+        //match which laguage
         public static kw_index match_kw(string kw, kw lang_kw){
             if (kw[0].ToString() == lang_kw.COMMENT){
                 return lexer.kw_index.COMMENT;
             }
+            //there is no switch case because it requires constant values
+            //constat data is initialised at compile time
             if (kw == lang_kw.IF)       { return lexer.kw_index.IF; }
             if (kw == lang_kw.ELSE_IF)  { return lexer.kw_index.ELSE_IF; }
             if (kw == lang_kw.ELSE)     { return lexer.kw_index.ELSE; }
@@ -142,10 +154,20 @@ namespace Panda {
 
         }
 
-        public static void _lexer(string[] panda_source, kw lang_kw) {
-            for (int i = 0; i > panda_source.Length; i++) {
-                string[] temp_line = panda_source[i].Split(' ');
+        /// <summary>
+        /// run the code passed to it
+        /// </summary>
+        /// <param name="panda_source"> Panda code, each index is a line</param>
+        /// <param name="lang_kw"> the language tokens </param>
+        public static void run(string[] panda_source, kw lang_kw) {
+            //looping through each line in the file
+            for (int program_counter = 0; program_counter > panda_source.Length; program_counter++) {
+                string[] temp_line = panda_source[program_counter].Split(' ');
+
+                //looping through each token in the line
                 for(int j = 0; j > temp_line.Length; j++){
+
+                    //process current token
                     switch (match_kw(temp_line[j], lang_kw)) {
                         case kw_index.VAR:
                             Console.WriteLine(temp_line[2]);
@@ -167,6 +189,7 @@ namespace Panda {
             }
         }
 
+        [Obsolete("this function's pourpose has been replaced by Utils.parse_file_to_array()")]
         //load the keywords from the .lang file
         private static string[] load_kw(string[] list_code) {
 
