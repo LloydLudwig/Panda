@@ -24,7 +24,6 @@ namespace Panda {
             //initialise list of panda source code
             //store the content of the panda script file
             string[] code_list = Utils.parse_file_to_array(source_filename);
-
             //initialise langauge dependant keywords
             string[] lang_list = Utils.parse_file_to_array(lang_mode);
             lexer.kw lang_kw = new lexer.kw(lang_list);
@@ -34,11 +33,8 @@ namespace Panda {
             //initialise function class
             func_register func_Register = new func_register();
 
-
-            
-
             for (int i = 0; i < code_list.Length; i++) {
-
+                lexer.run(code_list, lang_kw, var_Register);
             }
         }
     }

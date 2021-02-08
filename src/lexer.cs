@@ -124,7 +124,7 @@ namespace Panda {
         };
 
         //match which laguage
-        public static kw_index match_kw(string kw, kw lang_kw){
+        private static kw_index match_kw(string kw, kw lang_kw){
             if (kw[0].ToString() == lang_kw.COMMENT){
                 return lexer.kw_index.COMMENT;
             }
@@ -155,22 +155,26 @@ namespace Panda {
         }
 
         /// <summary>
-        /// run the code passed to it
+        /// loop through each line and the the key words which will be sorted by the switch case and executed appropriately
         /// </summary>
         /// <param name="panda_source"> Panda code, each index is a line</param>
         /// <param name="lang_kw"> the language tokens </param>
-        public static void run(string[] panda_source, kw lang_kw) {
+        /// <param name="var_Register"> main varible register </param>
+        public static void run(string[] panda_source, kw lang_kw, var_register var_Register) {
+            Console.WriteLine("[info] initialising panda code");
             //looping through each line in the file
-            for (int program_counter = 0; program_counter > panda_source.Length; program_counter++) {
+            for (int program_counter = 0; program_counter < panda_source.Length; program_counter++) {
                 string[] temp_line = panda_source[program_counter].Split(' ');
+                Console.WriteLine("[info] processing line " + program_counter);
 
                 //looping through each token in the line
-                for(int j = 0; j > temp_line.Length; j++){
+                for(int j = 0; j < temp_line.Length; j++){
 
                     //process current token
                     switch (match_kw(temp_line[j], lang_kw)) {
                         case kw_index.VAR:
-                            Console.WriteLine(temp_line[2]);
+                            var_Register.set_variable(temp_line[1], temp_line[3]);
+                            Console.WriteLine("variable " + temp_line[1] + " = " + var_Register.get_variable(temp_line[1]));
                             break;
                         case kw_index.INT:
                             break;
@@ -194,6 +198,15 @@ namespace Panda {
         private static string[] load_kw(string[] list_code) {
 
             return null;
+        }
+
+        /// <summary>
+        /// create generic variable
+        /// </summary>
+        /// <param name="temp_line"> the line containing the variable declartion </param>
+        /// <param name="var_Register"> the main variable storage </param>
+        private void var(string[] temp_line, var_register var_Register){
+            var_Register.set_variable(temp_line[1], temp_line[3]);
         }
     }
 }
