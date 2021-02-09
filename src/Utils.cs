@@ -33,5 +33,9 @@ namespace Panda {
                 return new string[0];
             }
         }
+
+        public static string getWorkingDir(){
+            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        }
     }
 }
