@@ -11,7 +11,7 @@ namespace Panda {
         /// and return in string array
         /// </summary>
         /// <param name="file_name">name of code file</param>
-        public static string[] parse_file_to_array(String file_name){
+        public static string[] parseFileToArray(String file_name){
             List<string> code_line_list = new List<string>();
             try { // try open file
                 var code_file = new FileStream( @file_name, FileMode.Open, FileAccess.Read);
@@ -35,7 +35,7 @@ namespace Panda {
         }
 
         public static string getWorkingDir(){
-            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().LO);
         }
     }
 }
