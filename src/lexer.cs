@@ -76,6 +76,8 @@ namespace Panda {
                     FLOAT = "float";
                     BOOL = "bool";
                     COMMENT = "//";
+
+                    Console.WriteLine("[Warning]: in-build english language keys have been loaded");
                 }
 
             }
@@ -161,11 +163,11 @@ namespace Panda {
         /// <param name="lang_kw"> the language tokens </param>
         /// <param name="var_Register"> main varible register </param>
         public static void run(string[] panda_source, kw lang_kw, var_register var_Register) {
-            Console.WriteLine("[info] initialising panda code");
+            Console.WriteLine("[info]: initialising panda code");
             //looping through each line in the file
             for (int program_counter = 0; program_counter < panda_source.Length; program_counter++) {
                 string[] temp_line = panda_source[program_counter].Split(' ');
-                Console.WriteLine("[info] processing line " + program_counter);
+                Console.WriteLine("[info]: processing line " + program_counter);
 
                 //looping through each token in the line
                 for(int j = 0; j < temp_line.Length; j++){
@@ -174,7 +176,7 @@ namespace Panda {
                     switch (match_kw(temp_line[j], lang_kw)) {
                         case kw_index.VAR:
                             var_Register.set_variable(temp_line[1], temp_line[3]);
-                            Console.WriteLine("variable " + temp_line[1] + " = " + var_Register.get_variable(temp_line[1]));
+                            Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.get_variable(temp_line[1]));
                             break;
                         case kw_index.INT:
                             break;
