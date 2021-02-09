@@ -126,7 +126,7 @@ namespace Panda {
             COMMENT //comments
         };
 
-        //match which laguage
+        //match which language tokens with the kw_index enum
         private static kw_index match_kw(string kw, kw lang_kw){
             if (kw[0].ToString() == lang_kw.COMMENT){
                 return lexer.kw_index.COMMENT;
