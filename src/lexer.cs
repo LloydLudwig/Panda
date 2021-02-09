@@ -176,7 +176,7 @@ namespace Panda {
                     switch (match_kw(temp_line[j], lang_kw)) {
                         case kw_index.VAR:
                             var_Register.set_variable(temp_line[1], temp_line[3]);
-                            Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.get_variable(temp_line[1]));
+                            Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.getVariable(temp_line[1]));
                             break;
                         case kw_index.INT:
                             break;
@@ -195,7 +195,7 @@ namespace Panda {
             }
         }
 
-        [Obsolete("this function's pourpose has been replaced by Utils.parse_file_to_array()")]
+        [Obsolete("this function's pourpose has been replaced by Utils.parseFileToArray()")]
         //load the keywords from the .lang file
         private static string[] load_kw(string[] list_code) {
 

@@ -6,26 +6,30 @@ namespace Panda {
             //getting panda source filename
             string source_filename;
             if (args.Length == 0 || args == null) {
-                Console.WriteLine("enter Panda source file: ");
+                Console.Write("[inpur]: enter Panda source file: ");
                 source_filename = Console.ReadLine();
-            }else { source_filename = args[0]; }
+            } else { source_filename = args[0]; }
 
             //check langauge option
-            string lang_mode = "en";
-            if (args.Length < 2 || args == null){
-                Console.WriteLine("[Info]: Executing Panda in english mode");
-                lang_mode = @".\lang\" + lang_mode + ".lang";
-            } else if (args.Length >= 2) {
-                lang_mode = @".\lang\" + args[1] + ".lang";
-                Console.WriteLine("[Info]: Executing Panda in " + args[1] + " mode");
+            string lang_mode;
+            if (args.Length <= 1 || args == null){
+                Console.Write("[input]: please enter language file name or ignore for default english mode ");
+                lang_mode = Utils.getWorkingDir()
+                    + "\\lang\\"
+                    + Console.ReadLine()
+                    + ".lang";
+            }else{
+                lang_mode = Utils.getWorkingDir()
+                    + "\\lang\\"
+                    + "en.lang";
             }
 
 
             //initialise list of panda source code
             //store the content of the panda script file
-            string[] code_list = Utils.parse_file_to_array(source_filename);
+            string[] code_list = Utils.parseFileToArray(source_filename);
             //initialise langauge dependant keywords
-            string[] lang_list = Utils.parse_file_to_array(lang_mode);
+            string[] lang_list = Utils.parseFileToArray(lang_mode);
             lexer.kw lang_kw = new lexer.kw(lang_list);
 
             //initialise variable class
