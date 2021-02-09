@@ -22,13 +22,14 @@ namespace Panda {
                         code_line_list.Add(line);
                     }
                 }
+                Console.WriteLine("[info]: " + file_name + " has been loaded in memory");
                 return code_line_list.ToArray();
             } catch(FileNotFoundException){
                 // if error accours while opening file
-                Console.WriteLine("[Warning]: Could not open file " + file_name);
+                Console.WriteLine("[Warning]: file " + file_name + " could not be found");
                 return new string[0];
             } catch(System.IO.DirectoryNotFoundException){
-                Console.WriteLine("Directory not found");
+                Console.WriteLine("[Warning]: Dictionary " + file_name + " could not be found");
                 return new string[0];
             }
         }
