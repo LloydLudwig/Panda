@@ -107,6 +107,7 @@ namespace Panda {
         }
 
         //enumeration of the key words
+        //it only exits as a bridge between the actual tokens and the switch statement
         public enum kw_index {
             //selection
             IF, ELSE_IF, ELSE, END_IF,
