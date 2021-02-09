@@ -20,7 +20,7 @@ namespace Panda {
                 //make sure the language file is complete
                 //this is currently hardcoded
                 //this may be cause of problems as new key words are added
-                if(lang_kw.Length != 0 || lang_kw.Length != 21){
+                if(lang_kw.Length != 0){
                     //selection
                     IF = lang_kw[0];
                     ELSE_IF = lang_kw[1];
