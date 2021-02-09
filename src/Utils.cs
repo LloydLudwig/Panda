@@ -35,7 +35,7 @@ namespace Panda {
         }
 
         public static string getWorkingDir(){
-            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().LO);
+            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
     }
 }
