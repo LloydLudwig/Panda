@@ -191,6 +191,9 @@ namespace Panda {
                             break;
                         case kw_index.COMMENT:
                             break;
+                        default:
+                            Console.WriteLine("[warning]: symbol " + temp_line[j] + " is defined");
+                            break;
                     }
                 }
             }
