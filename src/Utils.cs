@@ -34,6 +34,7 @@ namespace Panda {
             }
         }
 
+        //return the working directory of the executable of panda, it's purpose it to abstract the long concatenation
         public static string getWorkingDir(){
             return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
