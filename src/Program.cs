@@ -6,14 +6,14 @@ namespace Panda {
             //getting panda source filename
             string source_filename;
             if (args.Length == 0 || args == null) {
-                Console.Write("[inpur]: enter Panda source file: ");
+                Console.Write("[input]: please enter Panda source file: ");
                 source_filename = Console.ReadLine();
             } else { source_filename = args[0]; }
 
             //check langauge option
             string lang_mode;
             if (args.Length <= 1 || args == null){
-                Console.Write("[input]: please enter language file name or ignore for default english mode ");
+                Console.Write("[input]: please enter language file: ");
                 lang_mode = Utils.getWorkingDir()
                     + "\\lang\\"
                     + Console.ReadLine()
