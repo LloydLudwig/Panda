@@ -176,8 +176,8 @@ namespace Panda {
                     //process current token
                     switch (match_kw(temp_line[j], lang_kw)) {
                         case kw_index.VAR:
-                            var_Register.set_variable(temp_line[1], temp_line[3]);
-                            Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.getVariable(temp_line[1]));
+                            var(temp_line, var_Register);
+			    Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.getVariable(temp_line[1]));
                             break;
                         case kw_index.INT:
                             break;
@@ -211,7 +211,7 @@ namespace Panda {
         /// </summary>
         /// <param name="temp_line"> the line containing the variable declartion </param>
         /// <param name="var_Register"> the main variable storage </param>
-        private void var(string[] temp_line, var_register var_Register){
+        private static void var(string[] temp_line, var_register var_Register){
             var_Register.set_variable(temp_line[1], temp_line[3]);
         }
     }
