@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Panda {
 
-	class int_register {
+	public class int_register {
 
 		/// <summary>
 		///	variable name is the key adn the variable value is the integer variable
