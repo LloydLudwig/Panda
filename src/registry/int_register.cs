@@ -32,17 +32,17 @@ namespace Panda {
         /// <param name="int_name"> the name of the variable </param>
         /// <returns>dynamic variable value</returns>
         public int getVariable(string int_name) {
-            try {
+            if (isIntegerRegistered(int_name)){
                 int var_value;
                 panda_int.TryGetValue(int_name, out var_value);
                 return var_value;
-            }catch (KeyNotFoundException) {
+            }else{
                 Console.WriteLine("[warning]: integer variable " + int_name + " does not exist in the current context");
 				return 0;
             }
         }
 
-        //returns whether a given integer name is in the dictionary 
+        //returns whether a given integer name is in the dictionary
         public bool isIntegerRegistered(string int_name){
             return panda_int.ContainsKey(int_name);
         }

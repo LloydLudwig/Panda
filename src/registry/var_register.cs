@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Panda {
@@ -30,11 +31,12 @@ namespace Panda {
         /// <param name="var_name"> the name of the variable </param>
         /// <returns>dynamic variable value</returns>
         public dynamic getVariable(string var_name) {
-            try {
+            if (isVariableRegistered(var_name)){
                 dynamic var_value;
                 panda_var.TryGetValue(var_name, out var_value);
                 return var_value;
-            }catch (KeyNotFoundException) {
+            } else {
+                Console.WriteLine("[warning]: variable " + var_name + " does not exist in the current context");
                 return null;
             }
         }
