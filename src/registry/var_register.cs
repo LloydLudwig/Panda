@@ -39,10 +39,10 @@ namespace Panda {
             }
         }
 
-        // public string[] return_register(){
-        //     string[] register_buffer = new string[panda_var.Length];
-        //     foreach ()
-        // }
+        //returns whether a given variable name is in the dictionary
+        public bool isVariableRegistered(string var_name){
+            return panda_var.ContainsKey(var_name);
+        }
     }
 
 }
