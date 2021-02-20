@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Panda {
     class Utils{
@@ -38,5 +39,32 @@ namespace Panda {
         public static string getWorkingDir(){
             return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         }
+
+        [Obsolete("crashes when there are brackets in the expression")]
+        /// <sumary>
+        /// evaluate a mathematical expression from a string and return the integer value
+        /// </summary>
+        /// <param name="expression"> mathematical expression </param>
+        public static int EvaluateInteger(string expression) {
+            DataTable table = new DataTable();
+            table.Columns.Add("expression", string.Empty.GetType(), expression);
+            DataRow row = table.NewRow();
+            table.Rows.Add(row);
+            return int.Parse((string)row["expression"]);
+        }
+
+        [Obsolete("crashes when there are brackets in the expression")]
+        /// <sumary>
+        /// evaluate a mathematical expression from a string and return the integer value
+        /// </summary>
+        /// <param name="expression"> mathematical expression </param>
+        public static float EvaluateFloat(string expression) {
+            DataTable table = new DataTable();
+            table.Columns.Add("expression", string.Empty.GetType(), expression);
+            DataRow row = table.NewRow();
+            table.Rows.Add(row);
+            return float.Parse((string)row["expression"]);
+        }
+
     }
 }
