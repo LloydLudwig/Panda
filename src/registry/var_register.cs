@@ -20,7 +20,7 @@ namespace Panda {
         /// </summary>
         /// <param name="var_name">name of new variable</param>
         /// <param name="var_value">value of new variable</param>
-        public void set_variable(string var_name, dynamic var_value) {
+        public void setVariable(string var_name, dynamic var_value) {
             panda_var.Add(var_name, var_value);
         }
 
