@@ -2,4 +2,6 @@ int x = 12
 int z = 2
 int y = (x + z + 12 + x)
 x = 12
-// test
+if (x == 12 )
+    x = 5
+end_if
