@@ -201,12 +201,6 @@ namespace Panda {
             }
         }
 
-        [Obsolete("this function's pourpose has been replaced by Utils.parseFileToArray()")]
-        //load the keywords from the .lang file
-        private static string[] load_kw(string[] list_code) {
-
-            return null;
-        }
 
         private static string extractBracketContent(string variableDeclaration){
             if (variableDeclaration.Contains('(')){
