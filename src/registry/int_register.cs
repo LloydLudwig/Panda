@@ -20,26 +20,31 @@ namespace Panda {
 		/// <summary>
 		///	create interger variable
 		/// </summary>
-		/// <param name="var_name">name of new variable</param>
+		/// <param name="int_name">name of new variable</param>
         /// <param name="int_value">value of new variable</param>
-        public void setVariable(string var_name, int int_value) {
-            panda_int.Add(var_name, int_value);
+        public void setVariable(string int_name, int int_value) {
+            panda_int.Add(int_name, int_value);
         }
 
 		/// <summary>
         /// get integer value
         /// </summary>
-        /// <param name="var_name"> the name of the variable </param>
+        /// <param name="int_name"> the name of the variable </param>
         /// <returns>dynamic variable value</returns>
-        public int getVariable(string var_name) {
+        public int getVariable(string int_name) {
             try {
                 int var_value;
-                panda_int.TryGetValue(var_name, out var_value);
+                panda_int.TryGetValue(int_name, out var_value);
                 return var_value;
             }catch (KeyNotFoundException) {
-                Console.WriteLine("[warning]: integer variable " + var_name + " does not exist in the current context");
+                Console.WriteLine("[warning]: integer variable " + int_name + " does not exist in the current context");
 				return 0;
             }
+        }
+
+        //returns whether a given integer name is in the dictionary 
+        public bool isIntegerRegistered(string int_name){
+            return panda_int.ContainsKey(int_name);
         }
 
 
