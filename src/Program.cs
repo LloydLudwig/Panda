@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Panda {
     class Program {
 
@@ -34,12 +35,11 @@ namespace Panda {
 
             //initialise variable class
             var_register var_Register = new var_register();
+            int_register int_Register = new int_register();
             //initialise function class
             func_register func_Register = new func_register();
 
-            for (int i = 0; i < code_list.Length; i++) {
-                lexer.run(code_list, lang_kw, var_Register);
-            }
+            lexer.run(code_list, lang_kw, var_Register, int_Register);
         }
     }
 }
