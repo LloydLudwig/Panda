@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Panda {
     class lexer {
@@ -163,23 +164,22 @@ namespace Panda {
         /// <param name="panda_source"> Panda code, each index is a line</param>
         /// <param name="lang_kw"> the language tokens </param>
         /// <param name="var_Register"> main varible register </param>
-        public static void run(string[] panda_source, kw lang_kw, var_register var_Register) {
+        public static void run(string[] panda_source, kw lang_kw, var_register var_Register, int_register int_Register) {
             Console.WriteLine("[info]: initialising panda code");
             //looping through each line in the file
             for (int program_counter = 0; program_counter < panda_source.Length; program_counter++) {
+                //contains the content of the brackets that contain the value of the variable or condition
+                string bracketContent = extractBracketContent(panda_source[program_counter]);
                 string[] temp_line = panda_source[program_counter].Split(' ');
-                Console.WriteLine("[info]: processing line " + program_counter);
-
-                //looping through each token in the line
-                for(int j = 0; j < temp_line.Length; j++){
+                Console.WriteLine("[info]: processing line " + (program_counter + 1));
 
                     //process current token
-                    switch (match_kw(temp_line[j], lang_kw)) {
+                    switch (match_kw(temp_line[0], lang_kw)) {
                         case kw_index.VAR:
-                            var(temp_line, var_Register);
-			    Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.getVariable(temp_line[1]));
+                            VAR(temp_line, var_Register, bracketContent);
                             break;
                         case kw_index.INT:
+                            INT(temp_line, int_Register, bracketContent);
                             break;
                         case kw_index.STR:
                             break;
@@ -187,15 +187,17 @@ namespace Panda {
                             break;
                         case kw_index.BOOL:
                             break;
-                        case kw_index.NULL:
-                            break;
                         case kw_index.COMMENT:
                             break;
-                        default:
-                            Console.WriteLine("[warning]: symbol " + temp_line[j] + " is defined");
+                        case kw_index.NULL:
+                            if(int_Register.isIntegerRegistered(temp_line[0])){
+                                INT(temp_line, int_Register, bracketContent);
+
+                            }else{
+                            Console.WriteLine("[warning]: symbol " + temp_line[0] + " is defined");
+                            }
                             break;
                     }
-                }
             }
         }
 
@@ -206,13 +208,48 @@ namespace Panda {
             return null;
         }
 
+        private static string extractBracketContent(string variableDeclaration){
+            if (variableDeclaration.Contains('(')){
+                    return variableDeclaration.Substring(variableDeclaration.IndexOf('('));
+                }else if (variableDeclaration.Contains('[')){
+                    return variableDeclaration.Substring(variableDeclaration.IndexOf('['));
+                }else if (variableDeclaration.Contains('{')){
+                    return variableDeclaration.Substring(variableDeclaration.IndexOf('{'));
+                }else {
+                    return null;
+                }
+        }
+
         /// <summary>
         /// create generic variable
         /// </summary>
         /// <param name="temp_line"> the line containing the variable declartion </param>
         /// <param name="var_Register"> the main variable storage </param>
-        private static void var(string[] temp_line, var_register var_Register){
-            var_Register.set_variable(temp_line[1], temp_line[3]);
+        private static void VAR(string[] temp_line, var_register var_Register, string bracketContent){
+            var_Register.setVariable(temp_line[1], temp_line[3]);
+            Console.WriteLine("[info]: variable " + temp_line[1] + " stores " + var_Register.getVariable(temp_line[1]));
+        }
+
+        private static void INT(string[] temp_line, int_register int_Register, string bracketContent){
+            //this will replace all the variable tokens with the values of the variables
+            if (bracketContent != null){
+                List<string> otherVairableReferences = new List<string>();
+                string tempVariable = "";
+                int startOfVariable = 0;
+                for (int index = 0; index < bracketContent.Length; index++){
+                    if (char.IsLetter(bracketContent[index])){
+                        tempVariable = tempVariable + bracketContent[index];
+                        startOfVariable = index;
+                    } else if (!(char.IsLetter(bracketContent[index])) && tempVariable.Length > 0) {
+                        bracketContent = bracketContent.Replace(tempVariable, int_Register.getVariable(tempVariable).ToString());
+                        tempVariable = "";
+                    }
+                }
+            int_Register.setVariable(temp_line[1], EvaluateString.evaluate(bracketContent));
+            } else{ /*if the variable stores no*/
+                int_Register.setVariable(temp_line[1], EvaluateString.evaluate(temp_line[temp_line.Length - 1]));
+            }
+            Console.WriteLine("[info]: integer variable " + temp_line[0] + " stores " + int_Register.getVariable(temp_line[1]));
         }
     }
 }
