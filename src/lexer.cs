@@ -135,25 +135,26 @@ namespace Panda {
             //there is no switch case because it requires constant values
             //constat data is initialised at compile time
             if (kw == lang_kw.IF)       { return lexer.kw_index.IF; }
-            if (kw == lang_kw.ELSE_IF)  { return lexer.kw_index.ELSE_IF; }
-            if (kw == lang_kw.ELSE)     { return lexer.kw_index.ELSE; }
-            if (kw == lang_kw.END_IF)   { return lexer.kw_index.END_IF; }
-            if (kw == lang_kw.WHILE)    { return lexer.kw_index.WHILE; }
-            if (kw == lang_kw.END_WHILE){ return lexer.kw_index.END_WHILE; }
-            if (kw == lang_kw.FOR)      { return lexer.kw_index.FOR; }
-            if (kw == lang_kw.END_FOR)  { return lexer.kw_index.END_FOR; }
-            if (kw == lang_kw.INC)      { return lexer.kw_index.INC; }
-            if (kw == lang_kw.DEC)      { return lexer.kw_index.ADD; }
-            if (kw == lang_kw.ADD)      { return lexer.kw_index.ADD; }
-            if (kw == lang_kw.SUB)      { return lexer.kw_index.SUB; }
-            if (kw == lang_kw.MULT)     { return lexer.kw_index.MULT; }
-            if (kw == lang_kw.DIV)      { return lexer.kw_index.DIV; }
-            if (kw == lang_kw.SQRT)     { return lexer.kw_index.SQRT; }
-            if (kw == lang_kw.VAR)      { return lexer.kw_index.VAR; }
-            if (kw == lang_kw.INT)      { return lexer.kw_index.INT; }
-            if (kw == lang_kw.STR)      { return lexer.kw_index.STR; }
-            if (kw == lang_kw.FLOAT)    { return lexer.kw_index.FLOAT; }
-            if (kw == lang_kw.BOOL)     { return lexer.kw_index.BOOL; }
+            else if (kw == lang_kw.ELSE_IF)  { return lexer.kw_index.ELSE_IF; }
+            else if (kw == lang_kw.ELSE)     { return lexer.kw_index.ELSE; }
+            else if (kw == lang_kw.END_IF)   { return lexer.kw_index.END_IF; }
+            else if (kw == lang_kw.WHILE)    { return lexer.kw_index.WHILE; }
+            else if (kw == lang_kw.END_WHILE){ return lexer.kw_index.END_WHILE; }
+            else if (kw == lang_kw.FOR)      { return lexer.kw_index.FOR; }
+            else if (kw == lang_kw.END_FOR)  { return lexer.kw_index.END_FOR; }
+            else if (kw == lang_kw.INC)      { return lexer.kw_index.INC; }
+            else if (kw == lang_kw.DEC)      { return lexer.kw_index.ADD; }
+            else if (kw == lang_kw.ADD)      { return lexer.kw_index.ADD; }
+            else if (kw == lang_kw.SUB)      { return lexer.kw_index.SUB; }
+            else if (kw == lang_kw.MULT)     { return lexer.kw_index.MULT; }
+            else if (kw == lang_kw.DIV)      { return lexer.kw_index.DIV; }
+            else if (kw == lang_kw.SQRT)     { return lexer.kw_index.SQRT; }
+            else if (kw == lang_kw.VAR)      { return lexer.kw_index.VAR; }
+            else if (kw == lang_kw.INT)      { return lexer.kw_index.INT; }
+            else if (kw == lang_kw.STR)      { return lexer.kw_index.STR; }
+            else if (kw == lang_kw.FLOAT)    { return lexer.kw_index.FLOAT; }
+            else if (kw == lang_kw.BOOL)     { return lexer.kw_index.BOOL; }
+            else if (kw == lang_kw.COMMENT)  { return lexer.kw_index.COMMENT; }
             return lexer.kw_index.NULL;
 
         }
