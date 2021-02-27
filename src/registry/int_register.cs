@@ -23,7 +23,11 @@ namespace Panda {
 		/// <param name="int_name">name of new variable</param>
         /// <param name="int_value">value of new variable</param>
         public void setVariable(string int_name, int int_value) {
-            panda_int.Add(int_name, int_value);
+            if (isIntegerRegistered(int_name)){
+                panda_int[int_name] = int_value;
+            }else{
+                panda_int.Add(int_name, int_value);
+            }
         }
 
 		/// <summary>
