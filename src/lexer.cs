@@ -174,17 +174,20 @@ namespace Panda {
 
                 //process current token
                 switch (match_kw(new string(panda_source[program_counter]).Split(' ')[0], lang_kw)) {
-                    case kw_index.VAR:
-                        variable.create(new string(panda_source[program_counter]), var_Register);
-                        break;
+                    // case kw_index.VAR:
+                    //     variable.create(new string(panda_source[program_counter]), var_Register);
+                    //     break;
                     case kw_index.INT:
                         integer.create(new string(panda_source[program_counter]), int_Register);
                         break;
-                    case kw_index.STR:
-                        break;
-                    case kw_index.FLOAT:
-                        break;
-                    case kw_index.BOOL:
+                    // case kw_index.STR:
+                    //     break;
+                    // case kw_index.FLOAT:
+                    //     break;
+                    // case kw_index.BOOL:
+                    //     break;
+                    case kw_index.IF:
+                        program_counter = selection.IF(new string(panda_source[program_counter]), int_Register, program_counter);
                         break;
                     case kw_index.COMMENT:
                         break;
