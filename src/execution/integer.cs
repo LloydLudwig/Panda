@@ -21,6 +21,9 @@ namespace Panda {
             }
         }
 
+        ///<summary> replace all the references of variabels in the string with the actual values</summary>
+        ///<param name="bracket"> the bracket containing all the references to integers </param>
+        ///<param name="int_Register"> the current instance of the integer register </param>
         public static string repaceIntReference(string bracket, int_register int_Register){
             List<string> otherVairableReferences = new List<string>();
                 string tempVariable = "";
