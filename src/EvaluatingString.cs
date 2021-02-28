@@ -1,9 +1,6 @@
-/* A C# program to evaluate a given
-   expression where tokens
-   are separated by space.
-*/
 using System.Collections.Generic;
 using System.Text;
+using System;
 
 namespace Panda {
 
@@ -70,7 +67,8 @@ namespace Panda {
                 else if (tokens[i] == '+' ||
                         tokens[i] == '-' ||
                         tokens[i] == '*' ||
-                        tokens[i] == '/') {
+                        tokens[i] == '/' ||
+                        tokens[i] == '^') {
 
                     // While top of 'ops' has same
                     // or greater precedence to current
@@ -129,6 +127,8 @@ namespace Panda {
                     throw new System.NotSupportedException("Cannot divide by zero");
                 }
                 return a / b;
+            case '^':
+                return (int)Math.Pow((double) a, (double) b);
             }
             return 0;
         }
