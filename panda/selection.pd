@@ -1,2 +1,12 @@
-int hello = 12
+int hello = 20
+
+//
 if (hello == 20)
+
+
+// test
+int goodbye = 12
+hello = ( goodbye ^ hello )
+
+end_if
+
