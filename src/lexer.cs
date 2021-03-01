@@ -3,195 +3,57 @@ using System.Collections.Generic;
 
 namespace Panda {
     class lexer {
+        //program counter is the current line in the panda script
+        private int program_counter = 0;
+        private string[] panda_source;
 
-        public lexer(){
+        //initialise variable class
+        // var_register var_Register = new var_register();
+        int_register int_Register = new int_register();
 
-        }
+        //initialise function class
+        func_register func_Register = new func_register();
 
-        /// <summary>
-        /// store the current language keywords
-        /// </summary>
-        public struct kw {
+        //keyword struct to store the langauge tokens
+        token.kw lang_kw;
 
-            /// <summary>
-            /// take string from array and store according
-            /// </summary>
-            ///<param name="lang_kw"> contains the langauge key words in the right order</param>
-            public kw(string[] lang_kw){
-                //make sure the language file is complete
-                //this is currently hardcoded
-                //this may be cause of problems as new key words are added
-                if(lang_kw.Length != 0){
-                    //selection
-                    IF = lang_kw[0];
-                    ELSE_IF = lang_kw[1];
-                    ELSE = lang_kw[2];
-                    END_IF = lang_kw[3];
-                    //iteration
-                    WHILE = lang_kw[4];
-                    END_WHILE = lang_kw[5];
-                    FOR = lang_kw[6];
-                    END_FOR = lang_kw[7];
-                    //operation
-                    INC = lang_kw[8];
-                    DEC = lang_kw[9];
-                    ADD = lang_kw[10];
-                    SUB = lang_kw[11];
-                    MULT = lang_kw[12];
-                    DIV = lang_kw[13];
-                    SQRT = lang_kw[14];
-                    //delcaration
-                    VAR = lang_kw[15];
-                    //data types
-                    INT = lang_kw[16];
-                    STR = lang_kw[17];
-                    FLOAT = lang_kw[18];
-                    BOOL = lang_kw[19];
-                    COMMENT = lang_kw[20];
-                }
-                //failsafe incase the default langauge file is not found, this will be used
-                //the default language file has been left in to give users a template to work with
-                else{
-                    IF = "if";
-                    ELSE_IF = "else_if";
-                    ELSE = "else";
-                    END_IF = "end_if";
-                    //iteration
-                    WHILE = "while";
-                    END_WHILE = "end_while";
-                    FOR = "for";
-                    END_FOR = "end_for";
-                    //operation
-                    INC = "++";
-                    DEC = "--";
-                    ADD = "+";
-                    SUB = "-";
-                    MULT = "*";
-                    DIV = "/";
-                    SQRT = "**";
-                    //delcaration
-                    VAR = "var";
-                    //data types
-                    INT = "int";
-                    STR = "str";
-                    FLOAT = "float";
-                    BOOL = "bool";
-                    COMMENT = "//";
-
-                    Console.WriteLine("[Warning]: in-build english language keys have been loaded");
-                }
-
-            }
-            // will store the current language tokens as appropriate
-            // they only have getters as they should not be rewritten
-            public string IF {get;}
-            public string ELSE_IF {get;}
-            public string ELSE {get;}
-            public string END_IF {get;}
-            public string WHILE {get;}
-            public string END_WHILE {get;}
-            public string FOR {get;}
-            public string END_FOR {get;}
-            public string INC {get;}
-            public string DEC {get;}
-            public string ADD {get;}
-            public string SUB {get;}
-            public string MULT {get;}
-            public string DIV {get;}
-            public string SQRT {get;}
-            public string VAR {get;}
-            public string INT {get;}
-            public string STR {get;}
-            public string FLOAT {get;}
-            public string BOOL {get;}
-            public string COMMENT {get;}
-        }
-
-        //enumeration of the key words
-        //it only exits as a bridge between the actual tokens and the switch statement
-        public enum kw_index {
-            //selection
-            IF, ELSE_IF, ELSE, END_IF,
-
-            //iteration
-            WHILE, END_WHILE, FOR, END_FOR,
-
-            //operation
-            INC, DEC,
-            ADD, SUB, MULT , DIV, SQRT,
-
-            //store
-            VAR, INT, STR, FLOAT, BOOL,
-
-            NULL, //whitespace or unrecognised
-            COMMENT //comments
-        };
-
-        //match which language tokens with the kw_index enum
-        private static kw_index match_kw(string kw, kw lang_kw){
-            if (kw[0].ToString() == lang_kw.COMMENT){
-                return lexer.kw_index.COMMENT;
-            }
-            //there is no switch case because it requires constant values
-            //constat data is initialised at compile time
-            if (kw == lang_kw.IF)       { return lexer.kw_index.IF; }
-            else if (kw == lang_kw.ELSE_IF)  { return lexer.kw_index.ELSE_IF; }
-            else if (kw == lang_kw.ELSE)     { return lexer.kw_index.ELSE; }
-            else if (kw == lang_kw.END_IF)   { return lexer.kw_index.END_IF; }
-            else if (kw == lang_kw.WHILE)    { return lexer.kw_index.WHILE; }
-            else if (kw == lang_kw.END_WHILE){ return lexer.kw_index.END_WHILE; }
-            else if (kw == lang_kw.FOR)      { return lexer.kw_index.FOR; }
-            else if (kw == lang_kw.END_FOR)  { return lexer.kw_index.END_FOR; }
-            else if (kw == lang_kw.INC)      { return lexer.kw_index.INC; }
-            else if (kw == lang_kw.DEC)      { return lexer.kw_index.ADD; }
-            else if (kw == lang_kw.ADD)      { return lexer.kw_index.ADD; }
-            else if (kw == lang_kw.SUB)      { return lexer.kw_index.SUB; }
-            else if (kw == lang_kw.MULT)     { return lexer.kw_index.MULT; }
-            else if (kw == lang_kw.DIV)      { return lexer.kw_index.DIV; }
-            else if (kw == lang_kw.SQRT)     { return lexer.kw_index.SQRT; }
-            else if (kw == lang_kw.VAR)      { return lexer.kw_index.VAR; }
-            else if (kw == lang_kw.INT)      { return lexer.kw_index.INT; }
-            else if (kw == lang_kw.STR)      { return lexer.kw_index.STR; }
-            else if (kw == lang_kw.FLOAT)    { return lexer.kw_index.FLOAT; }
-            else if (kw == lang_kw.BOOL)     { return lexer.kw_index.BOOL; }
-            else if (kw == lang_kw.COMMENT)  { return lexer.kw_index.COMMENT; }
-            return lexer.kw_index.NULL;
-
+        public lexer(string[] lang_kw){
+            this.lang_kw = new token.kw(lang_kw);
         }
 
         /// <summary>
         /// loop through each line and the the key words which will be sorted by the switch case and executed appropriately
         /// </summary>
         /// <param name="panda_source"> Panda code, each index is a line</param>
-        /// <param name="lang_kw"> the language tokens </param>
+        /// <param name="lang_kw"> the language token </param>
         /// <param name="var_Register"> main varible register </param>
-        public static void run(string[] panda_source, kw lang_kw, var_register var_Register, int_register int_Register) {
+        public void run(string[] panda_source) {
+            this.panda_source = panda_source;
             Console.WriteLine("[info]: initialising panda code");
 
             //looping through each line in the file
-            for (int program_counter = 0; program_counter < panda_source.Length; program_counter++) {
+            for (program_counter = 0; program_counter < panda_source.Length; program_counter++) {
                 Console.WriteLine("[info]: processing line " + (program_counter + 1));
 
                 //process current token
-                switch (match_kw(new string(panda_source[program_counter]).Split(' ')[0], lang_kw)) {
-                    // case kw_index.VAR:
-                    //     variable.create(new string(panda_source[program_counter]), var_Register);
-                    //     break;
-                    case kw_index.INT:
+                switch (token.match_kw(new string(panda_source[program_counter]).Split(' ')[0], lang_kw)) {
+
+                    case token.kw_index.INT:
                         integer.create(new string(panda_source[program_counter]), int_Register);
                         break;
-                    // case kw_index.STR:
-                    //     break;
-                    // case kw_index.FLOAT:
-                    //     break;
-                    // case kw_index.BOOL:
-                    //     break;
-                    case kw_index.IF:
-                        program_counter = selection.IF(new string(panda_source[program_counter]), int_Register, program_counter);
+                    case token.kw_index.IF:
+                        if (!(selection.IF(new string(panda_source[program_counter]), int_Register, program_counter))){
+                            //jump to the end of the if statement
+                            lookLineOfToken(lang_kw.IF, lang_kw.END_IF);
+                        }
                         break;
-                    case kw_index.COMMENT:
+                    case token.kw_index.COMMENT:
                         break;
-                    case kw_index.NULL:
+                    case token.kw_index.NULL:
+                        if(new string(panda_source[program_counter]) == null || new string(panda_source[program_counter]) == string.Empty){
+                            break;
+                        }
+                        //the user is editing a variable that has already been created
                         if(int_Register.isIntegerRegistered(new string(panda_source[program_counter]).Split(' ')[0])){
                             integer.create(new string(panda_source[program_counter]), int_Register);
 
@@ -199,6 +61,25 @@ namespace Panda {
                         Console.WriteLine("[warning]: symbol " + new string(panda_source[program_counter]).Split(' ')[0] + " is defined");
                         }
                         break;
+                }
+            }
+        }
+
+        public void lookLineOfToken(string initial_kw, string search_kw){
+            //start with one counter
+            //loop through panda code
+            //increment <c>tokenCounter<c> when <c>initial_kw<c> is found
+            //decrement <c>tokenCounter<c> when <c>search_kw<c> is found
+            //if <c>tokenCounter<c> is 0 found new program counter
+            int tokenCounter = 0;
+            for (int localProgramCounter = program_counter; localProgramCounter < panda_source.Length; localProgramCounter++){
+                if (new string(panda_source[localProgramCounter].Split(' ')[0]) == initial_kw){
+                    tokenCounter++;
+                }else if (new string(panda_source[localProgramCounter].Split(' ')[0]) == search_kw){
+                    tokenCounter--;
+                }
+                if (tokenCounter == 0){
+                    program_counter = localProgramCounter;
                 }
             }
         }
