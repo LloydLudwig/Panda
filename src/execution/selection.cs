@@ -4,17 +4,25 @@ using System.Collections.Generic;
 
 namespace Panda{
     class selection{
-        public static int IF(string line, int_register int_Register, int currentProgramCounter){
+        public static bool IF(string line, int_register int_Register, int currentProgramCounter){
+            //remove extract the bracket form the if statement
             string bracket = extractBracketContent(line);
-            Console.WriteLine(bracket);
+            //remove the brackets
+            bracket = bracket.Replace("(", string.Empty);
+            bracket = bracket.Replace(")", string.Empty);
+            //replace all the variable references with the actual values
             StringBuilder numBuffer = new StringBuilder().Append(integer.repaceIntReference(extractBracketContent(bracket), int_Register));
-            Console.WriteLine(numBuffer);
+            //split the remaining data into array storing three parts
+            //[0] the first value
+            //[1] the operator
+            //[2] the second value
             string[] expression = numBuffer.ToString().Split(' ');
 
-            // evalBracket(numBuffer.ToString());
-
-            Console.WriteLine(evalBracket(expression));
-            return currentProgramCounter;
+            if (evalBracket(expression)) {
+                return true;
+            }else {
+                return false;
+            }
         }
 
         private static string extractBracketContent(string bracketWrappedExpression){
@@ -30,6 +38,7 @@ namespace Panda{
                     return bracketWrappedExpression;
                 }
         }
+
 
         private static bool evalBracket(string bracket){
             // Stack for numbers: 'values'
@@ -64,41 +73,23 @@ namespace Panda{
         private static bool evalBracket(string[] bracket){
             switch (bracket[1]){
                 case "==":
-                    if (int.Parse(bracket[0]) == int.Parse(bracket[2])){
-                        return true;
-                    }else{
-                        return false;
-                    }
+                    if (int.Parse(bracket[0]) == int.Parse(bracket[2])){ return true; }
+                    else{ return false; }
                 case ">=":
-                    if (int.Parse(bracket[0]) >= int.Parse(bracket[2])){
-                        return true;
-                    }else{
-                        return false;
-                    }
+                    if (int.Parse(bracket[0]) >= int.Parse(bracket[2])){ return true; }
+                    else{ return false; }
                 case "<=":
-                    if (int.Parse(bracket[0]) <= int.Parse(bracket[2])){
-                        return true;
-                    }else{
-                        return false;
-                    }
+                    if (int.Parse(bracket[0]) <= int.Parse(bracket[2])){ return true; }
+                    else{ return false; }
                 case "!=":
-                    if (int.Parse(bracket[0]) != int.Parse(bracket[2])){
-                        return true;
-                    }else{
-                        return false;
-                    }
+                    if (int.Parse(bracket[0]) != int.Parse(bracket[2])){ return true; }
+                    else{ return false; }
                 case "<":
-                    if (int.Parse(bracket[0]) < int.Parse(bracket[2])){
-                        return true;
-                    }else{
-                        return false;
-                    }
+                    if (int.Parse(bracket[0]) < int.Parse(bracket[2])){ return true; }
+                    else{ return false; }
                 case ">":
-                    if (int.Parse(bracket[0]) > int.Parse(bracket[2])){
-                        return true;
-                    }else{
-                        return false;
-                    }
+                    if (int.Parse(bracket[0]) > int.Parse(bracket[2])){ return true; }
+                    else{ return false; }
                 default:
                     Console.WriteLine("[warning]: symbole " + bracket[1] + " is not defined");
                     return false;
