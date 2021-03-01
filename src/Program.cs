@@ -31,15 +31,11 @@ namespace Panda {
             string[] code_list = Utils.parseFileToArray(source_filename);
             //initialise langauge dependant keywords
             string[] lang_list = Utils.parseFileToArray(lang_mode);
-            lexer.kw lang_kw = new lexer.kw(lang_list);
+            // lexer.kw lang_kw = new lexer.kw(lang_list);
 
-            //initialise variable class
-            var_register var_Register = new var_register();
-            int_register int_Register = new int_register();
-            //initialise function class
-            func_register func_Register = new func_register();
+            lexer Lexer = new lexer(lang_list);
 
-            lexer.run(code_list, lang_kw, var_Register, int_Register);
+            Lexer.run(code_list);
         }
     }
 }
