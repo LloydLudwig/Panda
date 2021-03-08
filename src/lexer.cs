@@ -50,7 +50,9 @@ namespace Panda {
                     case token.kw_index.COMMENT:
                         break;
                     case token.kw_index.NULL:
+                        //check if it's an empty line
                         if(new string(panda_source[program_counter]) == null || new string(panda_source[program_counter]) == string.Empty){
+                            //if it is an empty line discard and continue
                             break;
                         }
                         //the user is editing a variable that has already been created
