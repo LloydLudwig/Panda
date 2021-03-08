@@ -25,18 +25,30 @@ namespace Panda {
         ///<param name="bracket"> the bracket containing all the references to integers </param>
         ///<param name="int_Register"> the current instance of the integer register </param>
         public static string repaceIntReference(string bracket, int_register int_Register){
+            //store variable name references to be replaced after the search
+            //this is because if the variables are replaced with their value it changes the length of the string
+            //thus offsetting the loop
             List<string> otherVairableReferences = new List<string>();
-                string tempVariable = "";
-                int startOfVariable = 0;
-                for (int index = 0; index < bracket.Length; index++){
-                    if (char.IsLetter(bracket[index])){
-                        tempVariable = tempVariable + bracket[index];
-                        startOfVariable = index;
-                    } else if (!(char.IsLetter(bracket[index])) && tempVariable.Length > 0) {
-                        bracket = bracket.Replace(tempVariable, int_Register.getVariable(tempVariable).ToString());
-                        tempVariable = "";
-                    }
+            string tempVariable = "";
+            int startOfVariable = 0;
+            for (int index = 0; index < bracket.Length; index++){
+                if (char.IsLetter(bracket[index])){
+                    //check if current char it's part of a varible name
+                    tempVariable = tempVariable + bracket[index];
+                    startOfVariable = index;
+
+                } else if (!(char.IsLetter(bracket[index])) && tempVariable.Length > 0) {
+                    //check if current char is not a letter and it there is any variable names in the tempVariable
+                    //if true then the variable name has ended and can be replaced with the appropriate value
+                    otherVairableReferences.Add(tempVariable);
+                    tempVariable = "";
                 }
+            }
+            //takes each string (variableName) in the list (otherVariableRefrences)
+            //and runs the replace function for each one of them
+            foreach (string variableName in otherVairableReferences) {
+                bracket = bracket.Replace(variableName, int_Register.getVariable(variableName).ToString());
+            }
             return bracket;
         }
     }
