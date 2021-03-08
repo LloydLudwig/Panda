@@ -37,9 +37,7 @@ namespace Panda {
         /// <returns>dynamic variable value</returns>
         public int getVariable(string int_name) {
             if (isIntegerRegistered(int_name)){
-                int var_value;
-                panda_int.TryGetValue(int_name, out var_value);
-                return var_value;
+                return panda_int[int_name];
             }else{
                 Console.WriteLine("[warning]: integer variable " + int_name + " does not exist in the current context");
 				return 0;
