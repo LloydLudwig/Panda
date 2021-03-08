@@ -39,7 +39,8 @@ namespace Panda {
 
                 } else if (!(char.IsLetter(bracket[index])) && tempVariable.Length > 0) {
                     //check if current char is not a letter and it there is any variable names in the tempVariable
-                    //if true then the variable name has ended and can be replaced with the appropriate value
+                    //if true then the variable name has ended and can be added to the (otherVairableReferences)
+                    //to be replaced after 
                     otherVairableReferences.Add(tempVariable);
                     tempVariable = "";
                 }
