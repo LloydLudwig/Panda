@@ -39,38 +39,10 @@ namespace Panda{
                 }
         }
 
-
-        private static bool evalBracket(string bracket){
-            // Stack for numbers: 'values'
-            Stack<int> values = new Stack<int>();
-
-            // Stack for Operators: 'ops'
-            Stack<string> ops = new Stack<string>();
-            //store booelan operators
-            StringBuilder opsBuffer = new StringBuilder();
-            for (int i = 0; i < bracket.Length; i++){
-                //check for the boolean operators
-                if (bracket[i] == '>' ||
-                    bracket[i] == '<' ||
-                    bracket[i] == '=' ||
-                    bracket[i] == '!'){
-                        if (opsBuffer.Length < 2){
-                        opsBuffer.Append(bracket[i]);
-                        continue;
-                        }else{
-                            ops.Push(opsBuffer.ToString());
-                            opsBuffer.Clear();
-                        }
-                }
-
-                if (bracket[i] >= '0' && bracket[i] <= '9'){
-
-                }
-            }
-            return true;
-        }
-
+        //check the boolean operator and return the boolean value 
         private static bool evalBracket(string[] bracket){
+            //check which boolean operator is being used
+            //switch to the if statement for the right the boolean opeator
             switch (bracket[1]){
                 case "==":
                     if (int.Parse(bracket[0]) == int.Parse(bracket[2])){ return true; }
