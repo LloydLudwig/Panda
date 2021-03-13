@@ -5,7 +5,7 @@ using System;
 namespace Panda {
 
     // implementation of Shunting-yard's algorithm
-    public class EvaluateString {
+    public class math {
 
         public static int evaluate(string expression) {
             char[] tokens = expression.ToCharArray();

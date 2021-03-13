@@ -10,9 +10,9 @@ namespace Panda {
             //this will replace all the variable tokens with the values of the variables
             if (bracketContent != null){
                 bracketContent = repaceIntReference(bracketContent);
-            Panda.lexer.int_Register.setVariable(temp_line_array[1], EvaluateString.evaluate(bracketContent));
+            Panda.lexer.int_Register.setVariable(temp_line_array[1], math.evaluate(bracketContent));
             } else{ /*if the variable stores no*/
-                Panda.lexer.int_Register.setVariable(temp_line_array[1], EvaluateString.evaluate(temp_line_array[temp_line_array.Length - 1]));
+                Panda.lexer.int_Register.setVariable(temp_line_array[1], math.evaluate(temp_line_array[temp_line_array.Length - 1]));
             }
             if (temp_line_array[0] == "int"){
                 Console.WriteLine("[info]: integer variable " + temp_line_array[1] + " stores " + Panda.lexer.int_Register.getVariable(temp_line_array[1]));
