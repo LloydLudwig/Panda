@@ -19,3 +19,5 @@ str
 float
 bool
 //
+print
+input
