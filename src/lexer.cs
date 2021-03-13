@@ -85,6 +85,7 @@ namespace Panda {
                 }
                 if (tokenCounter == 0){
                     program_counter = localProgramCounter;
+                    break;
                 }
             }
         }
