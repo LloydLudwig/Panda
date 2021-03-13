@@ -9,7 +9,7 @@ namespace Panda {
 
         //initialise variable class
         // var_register var_Register = new var_register();
-        int_register int_Register = new int_register();
+        public static int_register int_Register = new int_register();
 
         //initialise function class
         func_register func_Register = new func_register();
@@ -39,13 +39,16 @@ namespace Panda {
                 switch (token.match_kw(new string(panda_source[program_counter]).Split(' ')[0], lang_kw)) {
 
                     case token.kw_index.INT:
-                        integer.create(new string(panda_source[program_counter]), int_Register);
+                        integer.create(new string(panda_source[program_counter]));
                         break;
                     case token.kw_index.IF:
                         if (!(selection.IF(new string(panda_source[program_counter]), int_Register, program_counter))){
                             //jump to the end of the if statement
                             lookLineOfToken(lang_kw.IF, lang_kw.END_IF);
                         }
+                        break;
+                    case token.kw_index.OUTPUT:
+                        Panda.execution.ouput._output(new string(panda_source[program_counter]));
                         break;
                     case token.kw_index.COMMENT:
                         break;
@@ -57,7 +60,7 @@ namespace Panda {
                         }
                         //the user is editing a variable that has already been created
                         if(int_Register.isIntegerRegistered(new string(panda_source[program_counter]).Split(' ')[0])){
-                            integer.create(new string(panda_source[program_counter]), int_Register);
+                            integer.create(new string(panda_source[program_counter]));
 
                         }else{
                         Console.WriteLine("[warning]: symbol " + new string(panda_source[program_counter]).Split(' ')[0] + " is defined");

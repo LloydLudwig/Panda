@@ -13,11 +13,11 @@ namespace Panda {
             /// take string from array and store according
             /// </summary>
             ///<param name="lang_kw"> contains the langauge key words in the right order</param>
-            public kw(string[] lang_kw){
+            public kw(string[] lang_kw) {
                 //make sure the language file is complete
                 //this is currently hardcoded
                 //this may be cause of problems as new key words are added
-                if(lang_kw.Length != 0){
+                if (lang_kw.Length != 0) {
                     //selection
                     IF = lang_kw[0];
                     ELSE_IF = lang_kw[1];
@@ -44,10 +44,12 @@ namespace Panda {
                     FLOAT = lang_kw[18];
                     BOOL = lang_kw[19];
                     COMMENT = lang_kw[20];
+                    //IO
+                    OUTPUT = lang_kw[21];
                 }
                 //failsafe incase the default langauge file is not found, this will be used
                 //the default language file has been left in to give users a template to work with
-                else{
+                else {
                     IF = "if";
                     ELSE_IF = "else_if";
                     ELSE = "else";
@@ -73,6 +75,9 @@ namespace Panda {
                     FLOAT = "float";
                     BOOL = "bool";
                     COMMENT = "//";
+                    //IO
+                    OUTPUT = "print";
+
 
                     Console.WriteLine("[Warning]: in-build english language keys have been loaded");
                 }
@@ -80,27 +85,28 @@ namespace Panda {
             }
             // will store the current language tokens as appropriate
             // they only have getters as they should not be rewritten
-            public string IF {get;}
-            public string ELSE_IF {get;}
-            public string ELSE {get;}
-            public string END_IF {get;}
-            public string WHILE {get;}
-            public string END_WHILE {get;}
-            public string FOR {get;}
-            public string END_FOR {get;}
-            public string INC {get;}
-            public string DEC {get;}
-            public string ADD {get;}
-            public string SUB {get;}
-            public string MULT {get;}
-            public string DIV {get;}
-            public string SQRT {get;}
-            public string VAR {get;}
-            public string INT {get;}
-            public string STR {get;}
-            public string FLOAT {get;}
-            public string BOOL {get;}
-            public string COMMENT {get;}
+            public string IF { get; }
+            public string ELSE_IF { get; }
+            public string ELSE { get; }
+            public string END_IF { get; }
+            public string WHILE { get; }
+            public string END_WHILE { get; }
+            public string FOR { get; }
+            public string END_FOR { get; }
+            public string INC { get; }
+            public string DEC { get; }
+            public string ADD { get; }
+            public string SUB { get; }
+            public string MULT { get; }
+            public string DIV { get; }
+            public string SQRT { get; }
+            public string VAR { get; }
+            public string INT { get; }
+            public string STR { get; }
+            public string FLOAT { get; }
+            public string BOOL { get; }
+            public string COMMENT { get; }
+            public string OUTPUT { get; }
         }
 
         //enumeration of the key words
@@ -123,7 +129,9 @@ namespace Panda {
             VAR, INT, STR, FLOAT, BOOL,
 
             NULL, //whitespace or unrecognised
-            COMMENT //comments
+            COMMENT, //comments
+
+            OUTPUT
         };
 
         //match which language tokens with the kw_index enum
@@ -153,7 +161,7 @@ namespace Panda {
             else if (kw == lang_kw.STR)       { return kw_index.STR; }
             else if (kw == lang_kw.FLOAT)     { return kw_index.FLOAT; }
             else if (kw == lang_kw.BOOL)      { return kw_index.BOOL; }
-            else if (kw == lang_kw.COMMENT)   { return kw_index.COMMENT; }
+            else if (kw == lang_kw.OUTPUT)    { return kw_index.OUTPUT; }
             return kw_index.NULL;
 
         }

@@ -11,7 +11,7 @@ namespace Panda{
             bracket = bracket.Replace("(", string.Empty);
             bracket = bracket.Replace(")", string.Empty);
             //replace all the variable references with the actual values
-            StringBuilder numBuffer = new StringBuilder().Append(integer.repaceIntReference(extractBracketContent(bracket), int_Register));
+            StringBuilder numBuffer = new StringBuilder().Append(integer.repaceIntReference(extractBracketContent(bracket)));
             //split the remaining data into array storing three parts
             //[0] the first value
             //[1] the operator
