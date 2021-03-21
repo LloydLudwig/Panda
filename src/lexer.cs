@@ -63,7 +63,7 @@ namespace Panda {
                             integer.create(new string(panda_source[program_counter]));
 
                         }else{
-                        Console.WriteLine("[warning]: symbol " + new string(panda_source[program_counter]).Split(' ')[0] + " is defined");
+                        Console.WriteLine("[warning]: symbol " + new string(panda_source[program_counter]).Split(' ')[0] + " is not defined");
                         }
                         break;
                 }
