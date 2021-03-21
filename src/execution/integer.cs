@@ -47,6 +47,12 @@ namespace Panda {
                     }
                     tempVariable = "";
                 }
+
+                //check for the last token
+                //other side it won't be registered
+                if(tempVariable.Length > 0 && index == bracket.Length - 1 && Panda.lexer.int_Register.isIntegerRegistered(tempVariable)){
+                        otherVairableReferences.Add(tempVariable);
+                }
             }
             //takes each string (variableName) in the list (otherVariableRefrences)
             //and runs the replace function for each one of them
